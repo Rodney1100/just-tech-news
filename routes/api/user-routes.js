@@ -55,10 +55,10 @@ router.post("/login", (req, res) => {
       res.status(400).json({ message: "No User with that email address!" });
       return;
     }
-    // verifie user
+    // verify user
     const validPassword = dbUserData.checkPassword(req.body.password);
     if (!validPassword) {
-      res.status(400).json({ message: "Incorenct Password!" });
+      res.status(400).json({ message: "Incorrect Password!" });
       return;
     }
     res.json({ user: dbUserData, message: "you are now Logged in!" });
