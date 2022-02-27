@@ -1,12 +1,11 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
-const { Post, User, Vote } = require("../../models");
+const { Post, User, Comment, Vote } = require("../../models");
 
 // get all users
 router.get("/", (req, res) => {
   console.log("================================");
   Post.findAll({
-    // Query configuration
     attributes: [
       "id",
       "post_url",
@@ -20,7 +19,21 @@ router.get("/", (req, res) => {
       ],
     ],
     order: [["created_at", "DESC"]],
-    include: [{ model: User, attributes: ["username"] }],
+    include: [
+      // include the Comment model here:
+      {
+        model: Comment,
+        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+        include: {
+          model: User,
+          attributes: ["username"],
+        },
+      },
+      {
+        model: User,
+        attributes: ["username"],
+      },
+    ],
   })
     .then((dbPostData) => res.json(dbPostData))
     .catch((err) => {
@@ -31,7 +44,9 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   Post.findOne({
-    where: { id: req.params.id },
+    where: {
+      id: req.params.id,
+    },
     attributes: [
       "id",
       "post_url",
@@ -44,7 +59,20 @@ router.get("/:id", (req, res) => {
         "vote_count",
       ],
     ],
-    include: [{ model: User, attributes: ["username"] }],
+    include: [
+      {
+        model: Comment,
+        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+        include: {
+          model: User,
+          attributes: ["username"],
+        },
+      },
+      {
+        model: User,
+        attributes: ["username"],
+      },
+    ],
   })
     .then((dbPostData) => {
       if (!dbPostData) {
@@ -75,7 +103,7 @@ router.post("/", (req, res) => {
 
 router.put("/upvote", (req, res) => {
   // custom static method created in models/Post.js
-  Post.upvote(req.body, { vote })
+  Post.upvote(req.body, { Vote })
     .then((updatedPostData) => res.json(updatedPostData))
 
     .catch((err) => {

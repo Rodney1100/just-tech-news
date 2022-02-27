@@ -1,3 +1,18 @@
 DB_NAME='just_tech_news_db'
 DB_USER='your-mysql-username'
 DB_PW='your-mysql-password'
+
+
+
+post upvotes
+{
+  "user_id": 1,
+  "post_id": 1
+}
+
+post 
+{
+  "title": "Runbuddy reaches 1 million subscribers",
+  "post_url": "https://runbuddy.com/press",
+  "user_id": 1
+}

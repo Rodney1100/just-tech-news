@@ -16,11 +16,11 @@ User.init(
     id: {
       // use the special sequelize datatype object provide what type of data it is
       type: DataTypes.INTEGER,
-      // this is the equivilate of sql's not null
+      // this is the equivalent of sql's not null
       allowNull: false,
       // instruct that this is the primary key
       primaryKey: true,
-      // turn on auto incramant
+      // turn on auto increment
       autoIncrement: true,
     },
     // define username column
@@ -49,7 +49,7 @@ User.init(
   },
   {
     hooks: {
-      // set up beforeCreate lifeCycle 'hook' fuctoinality
+      // set up beforeCreate lifeCycle 'hook' functionality
       async beforeCreate(newUserData) {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
