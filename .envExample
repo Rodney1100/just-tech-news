@@ -16,3 +16,14 @@ post
   "post_url": "https://runbuddy.com/press",
   "user_id": 1
 }
+ user {
+	"username":"rodneyFirst",
+	"email":"rod1@gmail.com",
+	"password":"1100"
+}
+
+{
+  "comment_text":"this article is awesome!!",
+  "user_id":"2",
+"post_id":"1"
+}
