@@ -2,11 +2,10 @@
   "name": "hacker-news-clone",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "scripts": {
     "test": "jest",
     "seeds": "node seeds/index.js",
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
